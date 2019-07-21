@@ -6,10 +6,15 @@ const geocode = require('./utils/geocode')
 
 const app = express()
 
+const port = process.env.PORT || 3000
+
+
 // Define paths for Express config
 const publicDirPath = path.join(__dirname,'../public')
 const viewPath = path.join(__dirname, '../templates/views')
 const partialsPath = path.join(__dirname, '../templates/partials')
+
+const name = 'Natthaphon Ratanaroekkhajorn'
 
 // Setup handlebars engine and views location
 app.set('view engine', 'hbs')
@@ -23,14 +28,14 @@ app.use(express.static(publicDirPath))
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
-        name: 'Nate'
+        name
     })
 })
 
 app.get('/about', (req, res) => {
     res.render('about',{
         title: 'About',
-        name: 'Nate'
+        name
     })
 })
 
@@ -38,7 +43,7 @@ app.get('/help', (req, res) => {
     res.render('help',{
         title: 'Help',
         helpText: 'Helpful text',
-        name: 'Nate'
+        name
     })
 })
 
@@ -81,7 +86,7 @@ app.get('/help/*', (req, res) => {
     res.render('404',{
         title: '404: not found',
         errorText: 'Help artical not found.',
-        name: 'Nate'
+        name
     })
 })
 
@@ -89,10 +94,10 @@ app.get('*', (req, res) => {
     res.render('404',{
         title: '404: not found',
         errorText: 'The page you are looking for does not exist.',
-        name: 'Nate'
+        name
     })
 })
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000.')
+app.listen(port, () => {
+    console.log('Server is up on port ' + port)
 })
